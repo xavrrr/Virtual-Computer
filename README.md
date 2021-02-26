@@ -14,5 +14,5 @@ To fix this, I decided to make my own virtual computer.
 
 3. The code is now compiled. Run `./cpu` and see the _magic_ happen.
 
-## Run program
+## Run a program
 
