@@ -69,8 +69,6 @@ typedef struct
 } CPU;
 
 //-----COMMANDS-----
-// TODO:
-//  - ADD OPCODE BESIDE FUNC
 
 // LDA, OPCODE: 0xA9
 void lda(CPU *cpu, Byte data)
@@ -79,70 +77,83 @@ void lda(CPU *cpu, Byte data)
     cpu->PC += 2;
 }
 
+// OPCODE: 0xA2
 void ldx(CPU *cpu, Byte data)
 {
     cpu->X = data;
     cpu->PC += 2;
 }
 
+// OPCODE: 0xA0
 void ldy(CPU *cpu, Byte data)
 {
     cpu->Y = data;
     cpu->PC += 2;
 }
 
+// OPCODE: 0xAA
 void tax(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0xA8
 void tay(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x98
 void tya(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x8A
 void txa(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x9A
 void txs(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x91
 void tys(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0xBA
 void tsx(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x92
 void tsy(CPU *cpu)
 {
     cpu->X = cpu->A;
 }
 
+// OPCODE: 0x18
 void clc(CPU *cpu)
 {
     cpu->flags[1] = 0;
     cpu->PC++;
 }
 
+// OPCODE: 0x38
 void sec(CPU *cpu)
 {
     cpu->flags[1] = 1;
     cpu->PC++;
 }
 
+// OPCODE: 0x88
 void dey(CPU *cpu)
 {
     if (cpu->Y == 0)
@@ -155,6 +166,7 @@ void dey(CPU *cpu)
     cpu->PC++;
 }
 
+// OPCODE: 0xCA
 void dex(CPU *cpu)
 {
     if (cpu->X == 0)
@@ -167,6 +179,7 @@ void dex(CPU *cpu)
     cpu->PC++;
 }
 
+// OPCODE: 0xC8
 void iny(CPU *cpu)
 {
     if (cpu->Y == 0xFF)
@@ -180,6 +193,7 @@ void iny(CPU *cpu)
     cpu->PC++;
 }
 
+// OPCODE: 0xE8
 void inx(CPU *cpu)
 {
     if (cpu->X == 0xFF)
@@ -193,17 +207,20 @@ void inx(CPU *cpu)
     cpu->PC++;
 }
 
+// OPCODE: 0xFF
 void noop(CPU *cpu)
 {
     cpu->PC++;
 }
 
+// OPCODE: 0x00
 void halt(CPU *cpu)
 {
     cpu->flags[2] = 1;
     printf("CPU halted.\n");
 }
 
+// OPCODE: 0xF0
 void beq(CPU *cpu, Word address)
 {
     if (cpu->flags[0] = 1)
@@ -216,6 +233,7 @@ void beq(CPU *cpu, Word address)
     }
 }
 
+// OPCODE: 0xD0
 void bne(CPU *cpu, Word address)
 {
     if (cpu->flags[0] = 0)
@@ -228,6 +246,7 @@ void bne(CPU *cpu, Word address)
     }
 }
 
+// OPCODE: 0xB0
 void bcs(CPU *cpu, Word address)
 {
     if (cpu->flags[1] = 1)
@@ -240,9 +259,10 @@ void bcs(CPU *cpu, Word address)
     }
 }
 
-void beq(CPU *cpu, Word address)
+// OPCODE: 0x90
+void bcc(CPU *cpu, Word address)
 {
-    if (cpu->flags[0] = 1)
+    if (cpu->flags[1] = 0)
     {
         cpu->PC = address;
     }
