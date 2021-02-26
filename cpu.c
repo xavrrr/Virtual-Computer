@@ -10,6 +10,10 @@
     List of all 'functions' supported by VM
     Inspired by W65C02 microprocessor
 
+    Stars on the siz are to know which func are implemented
+    1 star: the func exist but is not in the exec()
+    2 stars: the func is fully imlemented
+
     OPCODES:
         0x09: ORA
         0x18: CLC **
@@ -51,10 +55,10 @@
 
 typedef struct
 {
-    Word PC; // Program Counter
-    Byte SP; // Stack Pointer
-    Byte IR; // Instruction Register
-    Byte stack[0xFF];
+    Word PC;          // Program Counter
+    Byte SP;          // Stack Pointer
+    Byte IR;          // Instruction Register
+    Byte stack[0xFF]; // CPU Stack
 
     Byte A; // register A
     Byte X; // register X
@@ -65,6 +69,10 @@ typedef struct
 } CPU;
 
 //-----COMMANDS-----
+// TODO:
+//  - ADD OPCODE BESIDE FUNC
+
+// LDA, OPCODE: 0xA9
 void lda(CPU *cpu, Byte data)
 {
     cpu->A = data;
@@ -298,6 +306,7 @@ void compile_mem(Byte *mem[], Byte code[])
     }
 }
 
+// 'COMPILER' take care of converting hex code into function
 void exec(CPU *cpu, Byte *mem[])
 {
     switch (cpu->IR)
